@@ -49,7 +49,7 @@ def send_queue_message(sqs_queue_url, message):
 
     logger.debug(response)
 
-def main():
+def main(sqs_queue_url):
     """
         Main program
     """
@@ -60,11 +60,10 @@ def main():
     else:
         mylogging.init(loglevel=logging.INFO)
 
-    sqs_queue_url = "https://sqs.us-east-1.amazonaws.com/984385465437/scraper_queue"
-
     message = sys.stdin.readline().strip()
     send_queue_message(sqs_queue_url=sqs_queue_url, message=message)
 
 if __name__ == "__main__":
 
-    main()
+    sqs_queue_url = os.getenv("SQS_QUEUE_URL")
+    main(sqs_queue_url=sqs_queue_url)

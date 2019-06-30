@@ -5,6 +5,7 @@
     read getstream events from SQS and dump into snowflake
 """
 import logging
+import os
 
 import mylogging
 from scraper.aws_factory import build_sqs_client
@@ -114,7 +115,7 @@ class SqsReader():
 
 if __name__ == "__main__":
     mylogging.init(loglevel=logging.DEBUG)
-    sqs_queue_url = "https://sqs.us-east-1.amazonaws.com/984385465437/scraper_queue"
+    sqs_queue_url = os.getenv("SQS_QUEUE_URL")
     reader = SqsReader(sqs_queue_url=sqs_queue_url, sqs_client=build_sqs_client())
     num = reader.num_messages_in_queue()
     print(num)
