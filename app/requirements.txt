@@ -2,3 +2,5 @@ bs4
 pytest
 requests
 requests-html
+boto3==1.5.22
+botocore==1.8.36
